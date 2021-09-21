@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Result</title>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<meta charset="utf-8" lang="en-US">
+        <style>
+            html, body {
+                height: 75%;
+                margin: 0;
+                padding: 0;
+            }
+            #map {
+                height: 100%;
+            }
+
+            h1, h2 {
+                font-family: 'Courier New', Courier, monospace;
+            }
+        </style>
+	</head>
+	<body>
+		<div id="info" style="text-align: center">
+			<h1>The distance between the two points is:</h1>
+			<h2>{{ result }} Km</h3>
+		</div>
+		<div id="map"></div>
+		<div id="footer" style="text-align:center; margin-top:20px">
+            <p id="pointOne" style="display: none;">{{ point_one }}</p>
+            <p id="pointTwo" style="display: none;">{{ point_two }}</p>
+			<!-- Documentation of the API -->
+			<button onclick=document.location.href="http://127.0.0.1:5000/">Doc</button>
+			<br/>
+		</div>
+
+		<script>
+            const regex = /\'/g;
+			// propely format the string and then turn into json
+			var pointOne = JSON.parse(document.getElementById('pointOne').innerHTML.replaceAll(regex, '"'));
+            var pointTwo = JSON.parse(document.getElementById('pointTwo').innerHTML.replaceAll(regex, '"'));
+			var map;
+			var lines = [];
+			function initMap() {
+				// initial map configuration
+				map = new google.maps.Map(document.getElementById('map'), {
+					zoom: 5,
+					center: {lat: 55.755825, lng: 37.617298}
+				});
+
+                if(pointTwo != undefined) 
+                    drawLine()
+                
+			}
+
+			function clearLines(){
+				  for (var i = 0; i < lines.length; i++) {
+				    lines[i].setMap(null);
+				  }
+				lines =[]
+			}
+
+			function drawLine(){
+
+				// clear map before draw lines
+				clearLines()
+
+				var flightPlanCoordinates = [
+					{lat: pointOne['long'], lng: pointOne['lat']},
+					{lat: pointTwo['long'], lng: pointTwo['lat']}
+				];
+
+				var flightPath = new google.maps.Polyline({
+					path: flightPlanCoordinates,
+					geodesic: true,
+					strokeColor: '#FF0000',
+					strokeOpacity: 1.0,
+					strokeWeight: 2
+				});
+ 
+				lines.push(flightPath)
+				flightPath.setMap(map);
+			}
+
+		</script>
+
+		<script src=https://maps.googleapis.com/maps/api/js?key=AIzaSyBXYwH1EbqI_Fv2ZJ6ZWfS_ISBGbP-k-B4&lang=en_US&signed_in=true&callback=initMap
+				async defer>
+		</script>
+	</body>
+</html>
