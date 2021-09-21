@@ -13,7 +13,7 @@ The developer key can be obtained for free upon registration.
 
 ## Setup
 ### Localhost
-- git clone
+- git clone https://github.com/hugodecastro/api_distance_flask.git
 - pip install -r requirements.txt
 - run python main.py
 - Press http://127.0.0.1:5000 to see documentation page
