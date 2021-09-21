@@ -25,7 +25,7 @@ The developer key can be obtained for free upon registration.
 ## Optional Setup
 
 It is necessary to genete a API Key on [Google Maps Platform](https://cloud.google.com/maps-platform/) so the code can run propely as seen below:
-![Example](https://github.com/hugodecastro/api_distance_flask/app/util/img/main/example.png?raw=true)
+![Example](https://github.com/hugodecastro/api_distance_flask/app/util/img/example.PNG?raw=true)
 
 ## Authors
 - [@hugodecastro](https://github.com/hugodecastro)
